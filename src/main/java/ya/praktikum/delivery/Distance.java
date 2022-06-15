@@ -32,6 +32,10 @@ public final class Distance {
         throw new IllegalStateException("value = " + value);
     }
 
+    public BigDecimal value() {
+        return value;
+    }
+
     private enum LowerBound {
         BOUND0("0", "50"),
         BOUND2("2", "100"),

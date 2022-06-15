@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculatorTest {
 
@@ -20,5 +21,12 @@ class CalculatorTest {
         Calculator calculator = new Calculator();
         BigDecimal price = calculator.computePrice(Distance.of("1"), Size.SMALL, Durability.STURDY, Workload.NORMAL);
         assertEquals(BigDecimal.valueOf(400), price);
+    }
+
+    @Test
+    public void distanceTooLongForFragile() {
+        Calculator calculator = new Calculator();
+        assertThrows(FragileDistanceException.class, () ->
+                calculator.computePrice(Distance.of("100"), Size.SMALL, Durability.FRAGILE, Workload.NORMAL));
     }
 }
